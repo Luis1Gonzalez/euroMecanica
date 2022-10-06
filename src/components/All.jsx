@@ -13,7 +13,7 @@ const All = () => {
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="reception" className="mr-3 text-italic w-1/4">Recepción:</label>
-                    <p className='rounded max-h-7 text-center'>06/10/2022</p>
+                    <p className='rounded max-h-7 text-center w-[370px] bg-blue-400'>06/10/2022</p>
                 </div>
 
                 <div className='my-1 px-1 flex justify-between'>

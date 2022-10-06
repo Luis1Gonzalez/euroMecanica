@@ -6,7 +6,7 @@ import All from "./components/All"
 function App() {
 
   return (
-    <div className="container mx-auto font-josefin">
+    <div className="container mx-auto font-josefin min-w-[320px]">
       <Header />
       <Nav />
       <Form />
