@@ -24,17 +24,17 @@ const Form = () => {
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="reception" className="mr-3 text-italic w-1/4">Recepción:</label>
-                    <input type="date" id='reception' className='rounded max-h-7 w-3/4 text-center'/>
+                    <input type="date" id='reception' className='rounded max-h-7 w-[170px] text-center'/>
                 </div>
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="promise" className="mr-3 text-italic w-1/4">Compromiso:</label>
-                    <input type="date" id='promise' className='rounded max-h-7 w-3/4 text-center' />
+                    <input type="date" id='promise' className='rounded max-h-7 w-[170px] text-center' />
                 </div>
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="delivered" className="mr-3 text-italic w-1/4">Entrega:</label>
-                    <input type="date" id='delivered' className='rounded max-h-7 w-3/4 text-center' />
+                    <input type="date" id='delivered' className='rounded max-h-7 w-[170px] text-center' />
                 </div>
 
                 <div className='my-1 px-1 flex justify-between'>
