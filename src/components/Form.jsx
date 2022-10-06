@@ -2,7 +2,7 @@ import React from 'react'
 
 const Form = () => {
     return (
-        <div className='my-2 border py-1 text-blue-500  bg-gray-300'>
+        <div className='border py-1 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1 shadow-xl'>
             <form action="" className='flex flex-col justify-center'>
 
             <div className='mt-4'>

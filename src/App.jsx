@@ -9,8 +9,10 @@ function App() {
     <div className="container mx-auto font-josefin min-w-[320px]">
       <Header />
       <Nav />
-      <Form />
-      <All />
+      <div className="md:flex">
+        <Form />
+        <All />
+      </div>
     </div>
   )
 }
