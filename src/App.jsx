@@ -1,6 +1,7 @@
 import Header from "./components/Header"
-import Initial from "./components/Initial"
+import Form from "./components/Form"
 import Nav from "./components/Nav"
+import All from "./components/All"
 
 function App() {
 
@@ -8,7 +9,8 @@ function App() {
     <div className="container mx-auto font-josefin">
       <Header />
       <Nav />
-      <Initial />
+      <Form />
+      <All />
     </div>
   )
 }
