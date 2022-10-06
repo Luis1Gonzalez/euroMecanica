@@ -2,7 +2,7 @@ import React from 'react'
 
 const All = () => {
     return (
-        <div className='border py-1 text-blue-500 bg-gray-200 shadow-xl md:w-1/2 md:mx-1'>
+        <div className='border mt-1 md:mt-0 py-1 text-blue-500 bg-gray-200 shadow-xl md:w-1/2 md:mx-1'>
 
             <div className='mt-4 border'>
                 <span className='flex justify-center mb-3'>Datos del Cliente</span>

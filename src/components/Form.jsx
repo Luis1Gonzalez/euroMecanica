@@ -1,8 +1,11 @@
 import React from 'react'
 
 const Form = () => {
+
+
+    
     return (
-        <div className='border py-1 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1 shadow-xl'>
+        <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1 shadow-xl'>
             <form action="" className='flex flex-col justify-center'>
 
             <div className='mt-4'>
@@ -24,17 +27,17 @@ const Form = () => {
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="reception" className="mr-3 text-italic w-1/4">Recepción:</label>
-                    <input type="date" id='reception' className='rounded max-h-7 w-[170px] text-center'/>
+                    <input type="date" id='reception' className='rounded bg-white max-h-7 w-[170px] text-center'/>
                 </div>
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="promise" className="mr-3 text-italic w-1/4">Compromiso:</label>
-                    <input type="date" id='promise' className='rounded max-h-7 w-[170px] text-center' />
+                    <input type="date" id='promise' className='rounded bg-white max-h-7 w-[170px] text-center' />
                 </div>
 
                 <div className='my-1 px-1 flex justify-between items-center'>
                     <label htmlFor="delivered" className="mr-3 text-italic w-1/4">Entrega:</label>
-                    <input type="date" id='delivered' className='rounded max-h-7 w-[170px] text-center' />
+                    <input type="date" id='delivered' className='rounded bg-white max-h-7 w-[170px] text-center' />
                 </div>
 
                 <div className='my-1 px-1 flex justify-between'>
