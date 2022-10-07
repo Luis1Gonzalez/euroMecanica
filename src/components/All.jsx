@@ -1,7 +1,6 @@
 import React from 'react'
 
 const All = ({ register }) => {
-console.log(register)
 // const { client,cel,mail,reception,promise,delivered,possibleFailure,brand,model,year,km,failure,id } = regist
     return (
         <div className='border mt-1 md:mt-0 py-1 text-blue-500 bg-gray-200 shadow-xl md:w-1/2 md:mx-1'>

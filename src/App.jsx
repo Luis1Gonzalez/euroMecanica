@@ -2,12 +2,28 @@ import Header from "./components/Header"
 import Form from "./components/Form"
 import Nav from "./components/Nav"
 import All from "./components/All"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
 
   const [register, setRegister] = useState([]);
-console.log(register)
+
+  useEffect(() => {
+   const obtenerLS = () => {
+    const registerLS = JSON.parse(localStorage.getItem('register')) ?? [];
+
+    setRegister(registerLS)
+   }
+   obtenerLS()
+  }, [])
+
+  // Set el localStorage
+  useEffect(() => {
+    localStorage.setItem('register', JSON.stringify(register));
+  }, [register])
+
+
+
   return (
     <div className="container mx-auto font-josefin min-w-[320px]">
       <Header />
