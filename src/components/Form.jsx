@@ -29,7 +29,7 @@ const Form = ({ register, setRegister }) => {
         e.preventDefault();
         console.log(client);
 
-        if ([client, cel, mail, reception, promise, delivered, possibleFailure, brand, model, year, km, failure].includes('')) {
+        if ([client, cel, mail, reception, promise, possibleFailure, brand, model, year, km].includes('')) {
             console.log('Todos los campo requeridos');
             setError(true);
             return
