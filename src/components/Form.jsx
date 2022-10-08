@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Error from './Error'
 
-const Form = ({ register, setRegister }) => {
+const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
     const [client, setClient] = useState('');
     const [cel, setCel] = useState('');
@@ -18,16 +18,32 @@ const Form = ({ register, setRegister }) => {
 
     const [error, setError] = useState(false)
 
+    useEffect(() => {
+        if (Object.keys(registerDel).length > 0) {
+
+            setClient(registerDel.client)
+            setCel(registerDel.cel)
+            setMail(registerDel.mail)
+            setReception(registerDel.reception)
+            setPromise(registerDel.promise)
+            setDelivered(registerDel.delivered)
+            setPossibleFailure(registerDel.possibleFailure)
+            setBrand(registerDel.brand)
+            setModel(registerDel.model)
+            setYear(registerDel.year)
+            setKm(registerDel.km)
+            setFailure(registerDel.failure)
+        }
+    }, [registerDel])
+
     const generateId = () => {
-        const random = Math.random().toString(36).substr(2);
-        const dateNow = Date.now().toString(36);
-        return random + dateNow;
+        const dateNow = Date.now().toString(36).toUpperCase();
+        return dateNow;
 
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(client);
 
         if ([client, cel, mail, reception, promise, possibleFailure, brand, model, year, km].includes('')) {
             console.log('Todos los campo requeridos');
@@ -36,7 +52,7 @@ const Form = ({ register, setRegister }) => {
         }
         setError(false);
 
-        const ObjectRegister = {
+        const objectRegister = {
             client,
             cel,
             mail,
@@ -52,19 +68,15 @@ const Form = ({ register, setRegister }) => {
             id: generateId()
         }
 
-        
-        ObjectRegister.id = generateId()
-        setRegister([...register, ObjectRegister])
+        if (registerDel.id) {
+            objectRegister.id = registerDel.id //Editando el registro
+            const updateRegister = register.map(registerState => registerState.id === registerDel.id ? objectRegister : registerState)
+        } else {
+            objectRegister.id = generateId() //Creando nuevo registro
+            setRegister([...register, objectRegister])
+        }
 
-
-
-
-
-
-
-
-
-
+        // Reiniciando el formulario
         setClient('');
         setCel('');
         setMail('');
@@ -83,7 +95,7 @@ const Form = ({ register, setRegister }) => {
 
 
     return (
-        <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1 shadow-xl'>
+        <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1'>
             <form action="" onSubmit={handleSubmit} className='flex flex-col justify-center'>
 
                 <div className='mt-4'>
@@ -161,7 +173,7 @@ const Form = ({ register, setRegister }) => {
                 </Error>}
 
                 <div className='flex justify-between px-3 my-4 text-white'>
-                    <input type='submit' className='border w-full p-1.5 rounded-lg bg-blue-600 shadow-lg' value="Guardar Registro" />
+                    <input type='submit' value='Guardar Registro' className='border w-full p-1.5 rounded-lg bg-blue-600 shadow-lg' />
                 </div>
 
             </form>
