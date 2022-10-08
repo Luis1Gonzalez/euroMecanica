@@ -14,12 +14,17 @@ const handleDel = () => {
     }
 }
 
+
+var today = new Date();
+var now = today.toLocaleString();
+console.log(now);
     return (
         <div className='mt-1 md:mt-0 text-blue-500 md:mx-1'>
 
 
     <div key={id} className='mt-1 bg-gray-200 p-2 rounded-xl'>
-    <span className='flex justify-center mb-3'>{`Registro: ${id} `}</span>
+    <p className='mb-3'>Registro:<span className='text-red-800'>{` ${id}`}</span> </p>
+    <p>Ultima Actualización: <span className='text-red-800'>{`${now}`}</span></p>
     <div className='my-1 px-1 flex justify-between'>
         <label htmlFor="client" className="mr-3 text-italic w-1/4">Cliente:</label>
         <p className='rounded w-3/4 py-0.5 text-center placeholder:italic'>{client}</p>
