@@ -42,6 +42,9 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
     }
 
+    var today = new Date();
+    var now = today.toLocaleString();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -65,16 +68,17 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
             year,
             km,
             failure,
-            id: generateId()
+            id: generateId(),
+            now
         }
 
         if (registerDel.id) {
             objectRegister.id = registerDel.id //Editando el registro
             const updateRegister = register.map(registerState => registerState.id === registerDel.id ? objectRegister : registerState)
-        
-        setRegister(updateRegister)
-        setRegisterDel([...register,objectRegister])
-        
+
+            setRegister(updateRegister)
+            setRegisterDel([...register, objectRegister])
+
         } else {
             objectRegister.id = generateId() //Creando nuevo registro
             setRegister([...register, objectRegister])
@@ -93,10 +97,23 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
         setYear('');
         setKm('');
         setFailure('');
-
-
     }
 
+    const clear = () => {
+        setClient('');
+        setCel('');
+        setMail('');
+        setReception('');
+        setPromise('');
+        setDelivered('');
+        setPossibleFailure('');
+        setBrand('');
+        setModel('');
+        setYear('');
+        setKm('');
+        setFailure('');
+        setError(false);
+    }
 
     return (
         <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1'>
@@ -104,6 +121,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
                 <div className='mt-4'>
                     <span className='flex justify-center mb-3'>Datos del Cliente</span>
+                    
                     <div className='my-1 px-1 flex justify-between'>
                         <label htmlFor="client" className="mr-3 text-italic w-1/4">Cliente:</label>
                         <input type="text" id='client' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic' placeholder='Nombre del Cliente' value={client} onChange={(e) => setClient(e.target.value)} />
@@ -116,7 +134,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
                     <div className='my-1 px-1 flex justify-between'>
                         <label htmlFor="email" className="mr-3 text-italic w-1/4">Email:</label>
-                        <input type="mail" id='email' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic' placeholder='E-mail del Cliente' value={mail} onChange={(e) => setMail(e.target.value)} />
+                        <input type="mail" id='email' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic hover:lowercase' placeholder='E-mail del Cliente' value={mail} onChange={(e) => setMail(e.target.value)} />
                     </div>
 
                     <div className='my-1 px-1 flex justify-between items-center'>
@@ -156,7 +174,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
                     <div className='my-1 px-1 flex justify-between'>
                         <label htmlFor="year" className="mr-3 text-italic w-1/4">Año:</label>
-                        <input type="number" id='year' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic' placeholder='Año del Vehiculo' value={year} onChange={(e) => setYear(e.target.value)} />
+                        <input type="number" min='2000' max='2022' id='year' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic' placeholder='Año del Vehiculo' value={year} onChange={(e) => setYear(e.target.value)} />
                     </div>
 
                     <div className='my-1 px-1 flex justify-between'>
@@ -177,7 +195,8 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
                 </Error>}
 
                 <div className='flex justify-between px-3 my-4 text-white'>
-                    <input type='submit' value='Guardar Registro' className='border w-full p-1.5 rounded-lg bg-blue-600 shadow-lg' />
+                    <input type='submit' value='Guardar Registro' className='border w-1/2 m-3 p-1.5 rounded-lg bg-blue-600 shadow-lg' />
+                    <button className='border w-1/2 m-3 p-1.5 rounded-lg bg-red-600 shadow-lg' onClick={() => clear()} >Limpiar Formulario</button>
                 </div>
 
             </form>
