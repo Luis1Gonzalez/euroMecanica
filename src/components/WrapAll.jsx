@@ -18,4 +18,3 @@ const WrapAll = ({register, setRegisterDel, delRegister}) => {
 }
 
 export default WrapAll
-

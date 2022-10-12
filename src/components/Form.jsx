@@ -195,8 +195,8 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
                 </Error>}
 
                 <div className='flex justify-between px-3 my-4 text-white'>
-                    <input type='submit' value='Guardar Registro' className='border w-1/2 m-3 p-1.5 rounded-lg bg-blue-600 shadow-lg' />
-                    <button className='border w-1/2 m-3 p-1.5 rounded-lg bg-red-600 shadow-lg' onClick={() => clear()} >Limpiar Formulario</button>
+                    <input type='submit' value='Guardar' className='border w-1/2 m-3 p-1.5 rounded-lg bg-blue-600 shadow-lg' />
+                    <button className='border w-1/2 m-3 p-1.5 rounded-lg bg-red-600 shadow-lg' onClick={() => clear()} >Limpiar</button>
                 </div>
 
             </form>
