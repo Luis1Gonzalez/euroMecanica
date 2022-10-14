@@ -1,21 +1,24 @@
 import Header from "./components/Header"
-import Form from "./components/Form"
-import Nav from "./components/Nav"
-import WrapAll from "./components/WrapAll"
 import { useEffect, useState } from "react"
+import Budget from "./pages/Budget"
+import Home from "./pages/Home"
+import { Routes, BrowserRouter, Route } from "react-router-dom";
+
+
 
 function App() {
 
   const [register, setRegister] = useState([]);
-  const [registerDel, setRegisterDel] = useState({})
+  const [registerDel, setRegisterDel] = useState({});
+  const [cambiazo, setCambiazo] = useState({})
 
   useEffect(() => {
-   const obtenerLS = () => {
-    const registerLS = JSON.parse(localStorage.getItem('register')) ?? [];
+    const obtenerLS = () => {
+      const registerLS = JSON.parse(localStorage.getItem('register')) ?? [];
 
-    setRegister(registerLS)
-   }
-   obtenerLS()
+      setRegister(registerLS)
+    }
+    obtenerLS()
   }, [])
 
   // Set el localStorage
@@ -23,31 +26,40 @@ function App() {
     localStorage.setItem('register', JSON.stringify(register));
   }, [register])
 
-const delRegister = (id) => {
-  const updateRegister = register.filter(registerDel => registerDel.id !== id)
-  setRegister(updateRegister)
-}
-
+  const delRegister = (id) => {
+    const updateRegister = register.filter(registerDel => registerDel.id !== id)
+    setRegister(updateRegister)
+  }
 
 
   return (
     <div className="container mx-auto font-josefin min-w-[320px]">
-      <Header />
-      <Nav />
-      <div className="md:flex">
-        <Form
-         register={register}
-         setRegister={setRegister}
-         registerDel={registerDel}
-         setRegisterDel={setRegisterDel}
-         />
 
-        <WrapAll
-        register={register}
-        setRegisterDel={setRegisterDel}
-        delRegister={delRegister}
-        />
-      </div>
+<BrowserRouter>
+<Header />
+
+<Routes> 
+
+            <Route path='/' element={<Home
+              register={register}
+              setRegister={setRegister}
+              registerDel={registerDel}
+              setRegisterDel={setRegisterDel}
+              delRegister={delRegister}
+              setCambiazo={setCambiazo}
+            />}> </Route>
+
+<Route path='/budget' element={<Budget
+cambiazo={cambiazo}
+/>}></Route>
+
+
+</Routes>
+
+</BrowserRouter>
+
+
+
     </div>
   )
 }

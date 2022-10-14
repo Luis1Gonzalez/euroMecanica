@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Modal from './Modal'
 
-const All = ({ wrap, setRegisterDel, delRegister }) => {
+const All = ({ wrap, setRegisterDel, delRegister, setCambiazo, cambiazo }) => {
 
     const [showModal, setShowModal] = useState('collapse')
 
 const {client, reception, brand, model, year, id, now} = wrap
+
+
 
 
 const handleDel = () => {
@@ -31,8 +33,6 @@ const isCloseModal = () => {
         setShowModal('collapse')
     }
 }
-
-
 
 
     return (
@@ -83,6 +83,8 @@ showModal={showModal}
 setShowModal={setRegisterDel}
 isShowModal={isShowModal}
 isCloseModal={isCloseModal}
+setCambiazo={setCambiazo}
+cambiazo={cambiazo}
 />
 
 </div>

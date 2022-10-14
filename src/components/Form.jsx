@@ -116,7 +116,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
     }
 
     return (
-        <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 md:w-1/2 md:mx-1'>
+        <div className='border py-1 mb-1 md:mb-0 text-blue-500 bg-gray-200 mt-1 md:w-1/2 md:mx-1 rounded-xl'>
             <form action="" onSubmit={handleSubmit} className='flex flex-col justify-center'>
 
                 <div className='mt-4'>
@@ -134,7 +134,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
 
                     <div className='my-1 px-1 flex justify-between'>
                         <label htmlFor="email" className="mr-3 text-italic w-1/4">Email:</label>
-                        <input type="mail" id='email' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic hover:lowercase' placeholder='E-mail del Cliente' value={mail} onChange={(e) => setMail(e.target.value)} />
+                        <input type="mail" id='email' className='rounded w-3/4 placeholder-slate-300 py-0.5 text-center placeholder:italic' placeholder='E-mail del Cliente' value={mail} onChange={(e) => setMail(e.target.value)} />
                     </div>
 
                     <div className='my-1 px-1 flex justify-between items-center'>
