@@ -10,9 +10,9 @@ const Budget = ({ cambiazo }) => {
 
 
   const { client, cel, mail, reception, promise, possibleFailure, km, failure, delivered, brand, model, id, year, now } = cambiazo
-  
+
   return (
-    <div className='w-full h-full border bg-red-200'>
+    <div className='w-full h-full border bg-red-200  text-xs sm:text-base md:text-lg'>
 
       <p className='bg-blue-200 text-center text-2xl my-4 p-2'>Presupuesto</p>
 
@@ -35,54 +35,64 @@ const Budget = ({ cambiazo }) => {
         <p className='w-1/2 p-2 mx-2'>Validez: 10 días habiles</p>
       </div>
 
-      <form className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex'>
-        <div className='w-1/2'>
-          <p>Descripción</p>
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
-          <input type="text" className='my-1 w-[100%]' />
+      <form className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
+
+        <div className='w-full flex justify-between'>
+          <p className='w-2/3'>Descripción</p>
+          <p className='text-center w-1/5'>Cant.</p>
+          <p className='text-center w-1/5'>Precio</p>
+          <p className='text-center w-1/5'>Total</p>
         </div>
 
-        <div className='w-1/6 p-1 flex flex-col'>
-          <p className='text-center'>Unidades</p>
-          <input type="text" className='mx-1 mb-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
         </div>
 
-        <div className='w-1/6 p-1 flex flex-col'>
-          <p className='text-center'>Precio</p>
-          <input type="text" className='mx-1 mb-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
         </div>
 
-        <div className='w-1/6 p-1 flex flex-col'>
-          <p className='text-center'>Total</p>
-          <input type="text" className='mx-1 mb-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
-          <input type="text" className='m-1' />
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
         </div>
+
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
+        </div>
+
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
+        </div>
+
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
+        </div>
+
+        <div className='w-full flex justify-between items-center p-1  bg-violet-400'>
+          <input type="text" className='mx-1 w-2/3 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <input type="text" className='mx-1 w-1/6 h-5' />
+          <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'></p>
+        </div>
+
       </form>
 
       <div className="mt-2 border-2 border-gray-600 mx-2">
@@ -115,7 +125,7 @@ const Budget = ({ cambiazo }) => {
 
         <div className='w-1/3 h-[100px] flex justify-center items-center border-l-2 border-gray-600'>
           <p>Firma del Cliente</p>
-          </div>
+        </div>
       </div>
 
 
