@@ -8,6 +8,10 @@ const Budget = ({ cambiazo }) => {
   let date = new Date();
   let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
   let count = 0
+  let sum = 0;
+  const ini = 0;
+  let calcIva;
+  let calcTotal;
 
   const { client, cel, mail, reception, promise, possibleFailure, km, failure, delivered, brand, model, id, year, now } = cambiazo
 
@@ -16,49 +20,89 @@ const Budget = ({ cambiazo }) => {
   const [cant, setCant] = useState('');
   const [price, setPrice] = useState('');
   const [prod, setProd] = useState('');
+  const [pine, setPine] = useState([]);
+  const [subTotal, setSubTotal] = useState(0);
+  const [iva, setIva] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState('')
+  const [tButton, setTButton] = useState('Generar')
+  const [cButton, setCButton] = useState('red')
 
 
 
-  
+
   const generateId = () => {
     const dateNow = Date.now().toString(36).toUpperCase();
     return dateNow;
   }
 
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
 
+    if (description, cant, price) {
+      const objDetail = {
+        id: generateId(),
+        description,
+        cant,
+        price,
+        prod: cant * price,
 
-    const objDetail = {
-      id: generateId(),
-      description,
-      cant,
-      price,
-      prod: cant*price,
+      }
+
+
+
+      count = cant * price
+      setPine([...pine, count])
+      console.log(pine)
+
+
+ 
+
+
+
+
+      setDetails([...details, objDetail])
+
+      setDescripcion('');
+      setCant('');
+      setPrice('');
+
+
 
     }
-
-
-
-
-
-  
-    setDetails([...details, objDetail])
-
-    setDescripcion('');
-    setCant('');
-    setPrice('');
-
 
 
   }
 
 
+
+  
+  const fCalcTotal = () => {
+    
+    sum = pine.reduce((prev, curr) => prev + curr, ini);
+    setSubTotal(sum)
+    console.log(sum)
+
+    calcIva = sum * 0.21;
+    setIva(calcIva)
+    console.log(iva)
+
+    calcTotal = ((sum + iva)-discount);
+    setTotal(calcTotal)
+    console.log(calcTotal)
+
+    if(tButton === 'Sub-Total'){
+      setTButton('Total')
+      setCButton('green')
+    }else{
+      setTButton('Sub-Total')
+      setCButton('yellow')
+    }
   
 
-
+  }
 
 
 
@@ -89,7 +133,7 @@ const Budget = ({ cambiazo }) => {
         <p className='w-1/2 p-2 mx-2'>Validez: 10 días habiles</p>
       </div>
 
-      <form id="formAdd" onSubmit={onSubmit} className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
+      <form action="" onSubmit={handleSubmit} className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
 
         <div className='w-full flex justify-between'>
           <p className='w-2/3'>Descripción</p>
@@ -104,6 +148,14 @@ const Budget = ({ cambiazo }) => {
           <button type='submit' className='bg-blue-400  rounded-full w-6 h-5 text-lg text-white flex items-center justify-center'>+</button>
         </div>
 
+        <div>
+          <label htmlFor="discount">Descuento</label>
+          <input type="number" id="discount" className='mx-1 w-12 h-5' value={discount} onChange={(e) => setDiscount(e.target.value)} />
+        </div>
+
+        <div className='flex justify-center'>
+          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-lg' style={{backgroundColor:`${cButton}`}} onClick={() => fCalcTotal() && changeButton()}>{tButton}</button>
+        </div>
       </form>
 
       <form className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
@@ -124,25 +176,27 @@ const Budget = ({ cambiazo }) => {
 
       </form>
 
+
+
       <div className="mt-2 border-2 border-gray-600 mx-2">
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Sub-Total</p>
-          <p>0,00$</p>
+          <p>{`${subTotal.toFixed(2)}€`}</p>
         </div>
 
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Descuento</p>
-          <p>0,00$</p>
+          <p>{`${discount}€`}</p>
         </div>
 
         <div className='flex justify-end px-2'>
-          <p className='mx-7'>Iva</p>
-          <p>21,00%</p>
+          <p className='mx-7'>Iva(21%)</p>
+          <p>{`${iva.toFixed(2)}%`}</p>
         </div>
 
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Total Presupuesto</p>
-          <p>0,00$</p>
+          <p>{`${total.toFixed(2)}€`}</p>
         </div>
 
       </div>
