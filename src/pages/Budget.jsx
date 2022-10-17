@@ -55,7 +55,6 @@ const Budget = ({ cambiazo }) => {
 
       count = cant * price
       setPine([...pine, count])
-      console.log(pine)
 
 
  
@@ -83,15 +82,12 @@ const Budget = ({ cambiazo }) => {
     
     sum = pine.reduce((prev, curr) => prev + curr, ini);
     setSubTotal(sum)
-    console.log(sum)
 
     calcIva = sum * 0.21;
     setIva(calcIva)
-    console.log(iva)
 
     calcTotal = ((sum + iva)-discount);
     setTotal(calcTotal)
-    console.log(calcTotal)
 
     if(tButton === 'Sub-Total'){
       setTButton('Total')
@@ -158,7 +154,7 @@ const Budget = ({ cambiazo }) => {
         </div>
       </form>
 
-      <form className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
+      <div className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
         {details.map((d) => (
           <div className='w-full flex justify-between items-center py-1' key={d.id}>
 
@@ -166,6 +162,7 @@ const Budget = ({ cambiazo }) => {
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.cant}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.price}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'>{d.prod}</p>
+            <button className='w-6 h-5 rounded-full flex justify-center items-center text-white bg-red-600'>x</button>
 
 
 
@@ -174,7 +171,7 @@ const Budget = ({ cambiazo }) => {
 
 
 
-      </form>
+      </div>
 
 
 
@@ -191,7 +188,7 @@ const Budget = ({ cambiazo }) => {
 
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Iva(21%)</p>
-          <p>{`${iva.toFixed(2)}%`}</p>
+          <p>{`${iva.toFixed(2)}€`}</p>
         </div>
 
         <div className='flex justify-end px-2'>
