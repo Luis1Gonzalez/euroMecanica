@@ -72,6 +72,7 @@ const Form = ({ register, setRegister, registerDel, setRegisterDel }) => {
             now
         }
 
+
         if (registerDel.id) {
             objectRegister.id = registerDel.id //Editando el registro
             const updateRegister = register.map(registerState => registerState.id === registerDel.id ? objectRegister : registerState)

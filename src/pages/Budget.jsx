@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom';
+import PrintBudget from './PrintBudget';
+import { Routes, BrowserRouter, Route } from "react-router-dom";
 
-const Budget = ({ cambiazo }) => {
+const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConjuntDetails, conjuntTotals, setConjuntTotals }) => {
 
   let date = new Date();
   let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
@@ -15,6 +17,7 @@ const Budget = ({ cambiazo }) => {
 
   const { client, cel, mail, reception, promise, possibleFailure, km, failure, delivered, brand, model, id, year, now } = cambiazo
 
+
   const [details, setDetails] = useState([]);
   const [description, setDescripcion] = useState("");
   const [cant, setCant] = useState('');
@@ -24,11 +27,10 @@ const Budget = ({ cambiazo }) => {
   const [subTotal, setSubTotal] = useState(0);
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0);
-  const [discount, setDiscount] = useState('')
-  const [tButton, setTButton] = useState('Generar')
-  const [cButton, setCButton] = useState('red')
-
-
+  const [discount, setDiscount] = useState('');
+  const [tButton, setTButton] = useState('Generar');
+  const [cButton, setCButton] = useState('red');
+  const [disabled, setDisabled] = useState(false);
 
 
   const generateId = () => {
@@ -36,10 +38,8 @@ const Budget = ({ cambiazo }) => {
     return dateNow;
   }
 
-
   const handleSubmit = (e) => {
     e.preventDefault()
-
 
     if (description, cant, price) {
       const objDetail = {
@@ -48,19 +48,12 @@ const Budget = ({ cambiazo }) => {
         cant,
         price,
         prod: cant * price,
+        pine,
 
       }
 
-
-
       count = cant * price
       setPine([...pine, count])
-
-
- 
-
-
-
 
       setDetails([...details, objDetail])
 
@@ -68,47 +61,72 @@ const Budget = ({ cambiazo }) => {
       setCant('');
       setPrice('');
 
-
+      setPrintBudget(objDetail)
+      setConjuntDetails([...conjuntDetails, objDetail])
 
     }
 
+    // const objPrintBudget = {
+    //   id,
+    //   description,
+    //   cant,
+    //   price,
+    //   prod,
+    //   pine,
+    //   subTotal,
+    //   iva,
+    //   total,
+    //   discount
+    // }
 
   }
 
-
-
-  
   const fCalcTotal = () => {
-    
+
+    const objTotal = {
+      
+      subTotal,
+      iva,
+      total,
+      discount
+    }
+
     sum = pine.reduce((prev, curr) => prev + curr, ini);
     setSubTotal(sum)
 
     calcIva = sum * 0.21;
     setIva(calcIva)
 
-    calcTotal = ((sum + iva)-discount);
+    calcTotal = ((sum + iva) - discount);
     setTotal(calcTotal)
 
-    if(tButton === 'Sub-Total'){
+    if (tButton === 'Sub-Total') {
       setTButton('Total')
       setCButton('green')
-    }else{
+      setDisabled(true)
+
+    } else {
       setTButton('Sub-Total')
       setCButton('yellow')
+      setDisabled(false)
     }
-  
 
+   
+    setConjuntTotals(objTotal)
+
+    
   }
-
-
-
 
 
 
   return (
     <div className='w-full h-full border bg-red-200  text-xs sm:text-base md:text-lg'>
 
-      <p className='bg-blue-200 text-center text-2xl my-4 p-2'>Presupuesto</p>
+      <div className='flex justify-end items-center h-1 py-2 px-2'>
+        <p className='text-xs'><Link to='/printbudget'>Print</Link></p>
+      </div>
+
+      <p className='bg-blue-200 text-center text-2xl mb-2 p-2'>Presupuesto</p>
 
       <div className='w-full h-auto flex'>
         <div className='w-1/2 border-gray-600 border-2 p-2 mx-2'>
@@ -150,7 +168,7 @@ const Budget = ({ cambiazo }) => {
         </div>
 
         <div className='flex justify-center'>
-          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-lg' style={{backgroundColor:`${cButton}`}} onClick={() => fCalcTotal() && changeButton()}>{tButton}</button>
+          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-lg' style={{ backgroundColor: `${cButton}` }} onClick={() => fCalcTotal() && changeButton()} disabled={disabled}>{tButton}</button>
         </div>
       </form>
 
@@ -162,18 +180,13 @@ const Budget = ({ cambiazo }) => {
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.cant}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.price}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'>{d.prod}</p>
-            <button className='w-6 h-5 rounded-full flex justify-center items-center text-white bg-red-600'>x</button>
-
+            <button className='w-6 h-5 rounded-full flex justify-center items-center text-white text-xs bg-red-600 border-slate-900' onClick={() => console.log(details)}>x</button>
 
 
           </div>
         ))}
 
-
-
       </div>
-
-
 
       <div className="mt-2 border-2 border-gray-600 mx-2">
         <div className='flex justify-end px-2'>
@@ -209,7 +222,13 @@ const Budget = ({ cambiazo }) => {
       </div>
 
 
+
+
+
     </div>
+
+
+
   )
 }
 
