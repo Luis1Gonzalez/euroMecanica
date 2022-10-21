@@ -26,11 +26,21 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
   const [pine, setPine] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
   const [iva, setIva] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0)
   const [discount, setDiscount] = useState('');
+
+
+  const [stButton, setSTButton] = useState('Generar');
   const [tButton, setTButton] = useState('Generar');
+
   const [cButton, setCButton] = useState('red');
-  const [disabled, setDisabled] = useState(false);
+
+  const [sCButton, setSCButton] = useState('green');
+
+
+
+  const [sDisabled, setSDisabled] = useState(false);
+  const [tDisabled, setTDisabled] = useState(false);
 
 
   const generateId = () => {
@@ -66,61 +76,62 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
 
     }
 
-    // const objPrintBudget = {
-    //   id,
-    //   description,
-    //   cant,
-    //   price,
-    //   prod,
-    //   pine,
-    //   subTotal,
-    //   iva,
-    //   total,
-    //   discount
-    // }
-
-  }
-
-  const fCalcTotal = () => {
-
-    const objTotal = {
-      
-      subTotal,
-      iva,
-      total,
-      discount
-    }
-
     sum = pine.reduce((prev, curr) => prev + curr, ini);
     setSubTotal(sum)
 
     calcIva = sum * 0.21;
     setIva(calcIva)
 
-    calcTotal = ((sum + iva) - discount);
-    setTotal(calcTotal)
+  }
 
-    if (tButton === 'Sub-Total') {
-      setTButton('Total')
-      setCButton('green')
-      setDisabled(true)
+
+  const changeButton = () => {
+
+    if (sCButton === 'green') {
+      setSTButton('Listo')
+      setSCButton('yellow')
+      setSDisabled(false)
 
     } else {
-      setTButton('Sub-Total')
-      setCButton('yellow')
-      setDisabled(false)
+      setSTButton('Sub-Total')
+      setSCButton('transparent')
+      setSDisabled(true)
     }
 
-   
+  }
+
+  const fCalcTotal = () => {
+
+    calcTotal = (subTotal + iva - parseInt(discount));
+setTotal(calcTotal)
+
+        
+    const objTotal = {
+      
+      subTotal,
+      iva,
+      total,
+      discount:parseInt(discount)
+    }
+
+    if (cButton === 'red') {
+      setTButton('Listo')
+      setCButton('violet')
+      setTDisabled(false)
+
+    } else {
+      setTButton('Total')
+      setCButton('transparent')
+      setTDisabled(true)
+    }
+
     setConjuntTotals(objTotal)
 
     
   }
 
-
-
   return (
-    <div className='w-full h-full border bg-red-200  text-xs sm:text-base md:text-lg'>
+    <div className='w-full h-screen border bg-red-200  text-xs sm:text-base md:text-lg'>
 
       <div className='flex justify-end items-center h-1 py-2 px-2'>
         <p className='text-xs'><Link to='/printbudget'>Print</Link></p>
@@ -168,7 +179,8 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
         </div>
 
         <div className='flex justify-center'>
-          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-lg' style={{ backgroundColor: `${cButton}` }} onClick={() => fCalcTotal() && changeButton()} disabled={disabled}>{tButton}</button>
+          <button className='border w-1/2 m-3 p-1.5 rounded-lg  shadow-inner' style={{ backgroundColor: `${sCButton}` }} onClick={() =>changeButton()} disabled={sDisabled}>{stButton}</button>
+          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-inner' style={{ backgroundColor: `${cButton}` }} onClick={() => fCalcTotal()} disabled={tDisabled}>{tButton}</button>
         </div>
       </form>
 
@@ -206,7 +218,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
 
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Total Presupuesto</p>
-          <p>{`${total.toFixed(2)}€`}</p>
+          <p>{`${total}`}</p>
         </div>
 
       </div>
