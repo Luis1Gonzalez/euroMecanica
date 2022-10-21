@@ -14,12 +14,19 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, se
     let date = new Date();
     let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
 
+    const generateIdPresupuesto = () => {
+        const dateNow = Date.now().toString(36).toUpperCase();
+        return dateNow;
+      }
 
     return (
 
         <div className='w-full h-screen border  text-xs sm:text-base md:text-lg'>
 
-            <p className=' text-center text-2xl mb-2 p-2'>Presupuesto</p>
+            <p className=' text-center text-2xl p-2'>Presupuesto</p>
+            <div className='flex justify-end px-4 mb-2 text-red-900'>
+                <p>{`Nº: ${generateIdPresupuesto()}`}</p>
+            </div>
 
             <div className='w-full h-auto flex'>
                 <div className='w-1/2 border-gray-600 border-2 p-2 mx-2'>
