@@ -27,7 +27,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
   const [subTotal, setSubTotal] = useState(0);
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0)
-  const [discount, setDiscount] = useState('');
+  const [discount, setDiscount] = useState(0);
 
 
   const [stButton, setSTButton] = useState('Generar');
@@ -131,10 +131,11 @@ setTotal(calcTotal)
   }
 
   return (
-    <div className='w-full h-screen border bg-red-200  text-xs sm:text-base md:text-lg'>
+    <div className='w-full border bg-red-200  text-xs sm:text-base md:text-lg'>
 
       <div className='flex justify-end items-center h-1 py-2 px-2'>
-        <p className='text-xs'><Link to='/printbudget'>Print</Link></p>
+      <p className='text-xs mx-2'><Link to='/'>Volver</Link></p>
+        <p className='text-xs mx-2'><Link to='/printbudget'>Print</Link></p>
       </div>
 
       <p className='bg-blue-200 text-center text-2xl mb-2 p-2'>Presupuesto</p>

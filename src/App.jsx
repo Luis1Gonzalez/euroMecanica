@@ -8,6 +8,7 @@ import { Routes, BrowserRouter, Route } from "react-router-dom";
 
 
 
+
 function App() {
 
   const [register, setRegister] = useState([]);
@@ -65,7 +66,9 @@ function App() {
             />}>
           </Route>
 
-          <Route path='/printbudget' element={<PrintBudget
+          <Route path='/printbudget' element={
+          
+          <PrintBudget
             cambiazo={cambiazo} 
             printBudget={printBudget}
             setPrintBudget={setPrintBudget}
@@ -73,8 +76,9 @@ function App() {
             setConjuntDetails={setConjuntDetails}
             conjuntTotals={conjuntTotals}
             setConjuntTotals={setConjuntTotals}
-            />}>
-          </Route>
+            />
+            
+            }></Route>
 
 
         </Routes>

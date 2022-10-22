@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react'
-
 import { Link } from 'react-router-dom';
 
 const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConjuntDetails, conjuntTotals, setConjuntTotals }) => {
@@ -19,9 +18,20 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, se
         return dateNow;
       }
 
+      const clearBudgetPrint = () => {
+        setConjuntTotals('')
+        setConjuntDetails([])
+      }
+
     return (
 
-        <div className='w-full h-screen border  text-xs sm:text-base md:text-lg'>
+        <div className='w-full border  text-xs sm:text-base md:text-lg'>
+
+<div className='flex justify-end items-center h-1 py-2 px-2'>
+      <p className='text-xs mx-2'><Link to='/'>Volver</Link></p>
+      <p className='text-xs mx-2'><Link to='/' onClick={() => clearBudgetPrint()}>Borrar</Link></p>
+        <p className='text-xs mx-2'><Link to='/printbudget'>Print</Link></p>
+      </div>
 
             <p className=' text-center text-2xl p-2'>Presupuesto</p>
             <div className='flex justify-end px-4 mb-2 text-red-900'>
@@ -48,6 +58,13 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, se
             </div>
 
             <div className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
+
+<div className='flex justify-end pr-3'>
+    <p className='mr-16'>Cant</p>
+    <p className='mr-16'>Precio</p>
+    <p className='mr-6'>Total</p>
+</div>
+
                 {conjuntDetails.map((c) => (
                     <div className='w-full flex justify-between items-center py-1' key={c.id}>
                         <p className='mr-1 w-2/3 border-b-2 border-gray-600 h-5 flex items-center uppercase'>{c.description}</p>
