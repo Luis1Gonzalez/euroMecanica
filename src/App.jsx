@@ -15,8 +15,9 @@ function App() {
   const [registerDel, setRegisterDel] = useState({});
   const [cambiazo, setCambiazo] = useState({})
   const [printBudget, setPrintBudget] = useState({})
-  const [conjuntDetails, setConjuntDetails] =useState([])
-  const [conjuntTotals, setConjuntTotals] =useState('')
+  const [conjuntDetails, setConjuntDetails] = useState([])
+  const [conjuntTotals, setConjuntTotals] = useState('')
+  const [details, setDetails] = useState([])
 
   useEffect(() => {
     const obtenerLS = () => {
@@ -56,29 +57,33 @@ function App() {
           />}> </Route>
 
           <Route path='/budget' element={<Budget
-            cambiazo={cambiazo} 
+            cambiazo={cambiazo}
             printBudget={printBudget}
             setPrintBudget={setPrintBudget}
             conjuntDetails={conjuntDetails}
             setConjuntDetails={setConjuntDetails}
             conjuntTotals={conjuntTotals}
             setConjuntTotals={setConjuntTotals}
-            />}>
+            details={details}
+            setDetails={setDetails}
+          />}>
           </Route>
 
           <Route path='/printbudget' element={
-          
-          <PrintBudget
-            cambiazo={cambiazo} 
-            printBudget={printBudget}
-            setPrintBudget={setPrintBudget}
-            conjuntDetails={conjuntDetails}
-            setConjuntDetails={setConjuntDetails}
-            conjuntTotals={conjuntTotals}
-            setConjuntTotals={setConjuntTotals}
+
+            <PrintBudget
+              cambiazo={cambiazo}
+              printBudget={printBudget}
+              setPrintBudget={setPrintBudget}
+              conjuntDetails={conjuntDetails}
+              setConjuntDetails={setConjuntDetails}
+              conjuntTotals={conjuntTotals}
+              setConjuntTotals={setConjuntTotals}
+              details={details}
+              setDetails={setDetails}
             />
-            
-            }></Route>
+
+          }></Route>
 
 
         </Routes>

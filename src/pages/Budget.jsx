@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import PrintBudget from './PrintBudget';
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 
-const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConjuntDetails, conjuntTotals, setConjuntTotals }) => {
+const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConjuntDetails, conjuntTotals, setConjuntTotals, details, setDetails }) => {
 
   let date = new Date();
   let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
   let count = 0
+  let countless=0
   let sum = 0;
+  let rest =0;
   const ini = 0;
   let calcIva;
   let calcTotal;
@@ -18,7 +20,6 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
   const { client, cel, mail, reception, promise, possibleFailure, km, failure, delivered, brand, model, id, year, now } = cambiazo
 
 
-  const [details, setDetails] = useState([]);
   const [description, setDescripcion] = useState("");
   const [cant, setCant] = useState('');
   const [price, setPrice] = useState('');
@@ -28,19 +29,15 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0)
   const [discount, setDiscount] = useState(0);
-
-
   const [stButton, setSTButton] = useState('Generar');
   const [tButton, setTButton] = useState('Generar');
-
-  const [cButton, setCButton] = useState('red');
-
+  const [cButton, setCButton] = useState('transparent');
   const [sCButton, setSCButton] = useState('green');
-
-
-
   const [sDisabled, setSDisabled] = useState(false);
-  const [tDisabled, setTDisabled] = useState(false);
+  const [tDisabled, setTDisabled] = useState(true);
+  const [pineLess, setPineLess] = useState([]);
+
+
 
 
   const generateId = () => {
@@ -59,8 +56,9 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
         price,
         prod: cant * price,
         pine,
-
       }
+
+
 
       count = cant * price
       setPine([...pine, count])
@@ -74,15 +72,19 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
       setPrintBudget(objDetail)
       setConjuntDetails([...conjuntDetails, objDetail])
 
+
     }
-
-    sum = pine.reduce((prev, curr) => prev + curr, ini);
-    setSubTotal(sum)
-
-    calcIva = sum * 0.21;
-    setIva(calcIva)
-
   }
+
+  const deleteDetail = (d) => {
+    const updateDetails = details.filter(detailsDel => detailsDel.id !== d.id)
+    setDetails(updateDetails)
+
+    countless = d.cant * d.price
+    setPineLess([...pineLess, countless])
+    
+  }
+
 
 
   const changeButton = () => {
@@ -96,14 +98,20 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConj
       setSTButton('Sub-Total')
       setSCButton('transparent')
       setSDisabled(true)
+      setTDisabled(false)
+      setCButton('orange')
+      sum = pine.reduce((prev, curr) => prev + curr, ini);
+      rest = pineLess.reduce((prev, curr) => prev + curr, ini);
+      setSubTotal(sum-rest)
+  
+      calcIva = sum * 0.21;
+      setIva(calcIva)
     }
-
   }
 
   const fCalcTotal = () => {
 
     calcTotal = (subTotal + iva - parseInt(discount));
-setTotal(calcTotal)
 
         
     const objTotal = {
@@ -114,21 +122,19 @@ setTotal(calcTotal)
       discount:parseInt(discount)
     }
 
-    if (cButton === 'red') {
+    if (cButton === 'orange') {
       setTButton('Listo')
       setCButton('violet')
-      setTDisabled(false)
 
     } else {
       setTButton('Total')
       setCButton('transparent')
       setTDisabled(true)
     }
-
-    setConjuntTotals(objTotal)
-
-    
+    setTotal(calcTotal)
+    setConjuntTotals(objTotal)    
   }
+
 
   return (
     <div className='w-full border bg-red-200  text-xs sm:text-base md:text-lg'>
@@ -193,7 +199,7 @@ setTotal(calcTotal)
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.cant}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex justify-center items-center'>{d.price}</p>
             <p className='mx-1 bg-white w-1/6 h-5 flex items-center justify-center'>{d.prod}</p>
-            <button className='w-6 h-5 rounded-full flex justify-center items-center text-white text-xs bg-red-600 border-slate-900' onClick={() => console.log(details)}>x</button>
+            <button className='w-6 h-5 rounded-full flex justify-center items-center text-white text-xs bg-red-600 border-slate-900' onClick={() => deleteDetail(d)}>x</button>
 
 
           </div>

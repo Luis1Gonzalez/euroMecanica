@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, setConjuntDetails, conjuntTotals, setConjuntTotals }) => {
+const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, details, setDetails, conjuntTotals, setConjuntTotals }) => {
 
 
 
@@ -22,6 +22,8 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, se
         setConjuntTotals('')
         setConjuntDetails([])
       }
+
+      console.log(details)
 
     return (
 
@@ -64,7 +66,7 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, conjuntDetails, se
     <p className='mr-6'>Total</p>
 </div>
 
-                {conjuntDetails.map((c) => (
+                {details.map((c) => (
                     <div className='w-full flex justify-between items-center py-1' key={c.id}>
                         <p className='mr-1 w-2/3 border-b-2 border-gray-600 h-5 flex items-center uppercase'>{c.description}</p>
                         <p className='mx-1 w-1/6 border-b-2 border-gray-600 h-5 flex justify-center items-center'>{c.cant}</p>
