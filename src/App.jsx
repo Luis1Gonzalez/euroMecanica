@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import Budget from "./pages/Budget"
 import Home from "./pages/Home"
 import PrintBudget from "./pages/PrintBudget";
+import Invoice from "./pages/Invoice";
+import PrintInvoice from "./pages/PrintInvoice";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 
 
@@ -15,7 +17,6 @@ function App() {
   const [registerDel, setRegisterDel] = useState({});
   const [cambiazo, setCambiazo] = useState({})
   const [printBudget, setPrintBudget] = useState({})
-  const [conjuntDetails, setConjuntDetails] = useState([])
   const [conjuntTotals, setConjuntTotals] = useState('')
   const [details, setDetails] = useState([])
 
@@ -60,8 +61,6 @@ function App() {
             cambiazo={cambiazo}
             printBudget={printBudget}
             setPrintBudget={setPrintBudget}
-            conjuntDetails={conjuntDetails}
-            setConjuntDetails={setConjuntDetails}
             conjuntTotals={conjuntTotals}
             setConjuntTotals={setConjuntTotals}
             details={details}
@@ -69,21 +68,38 @@ function App() {
           />}>
           </Route>
 
-          <Route path='/printbudget' element={
-
-            <PrintBudget
+          <Route path='/printbudget' element={<PrintBudget
               cambiazo={cambiazo}
               printBudget={printBudget}
               setPrintBudget={setPrintBudget}
-              conjuntDetails={conjuntDetails}
-              setConjuntDetails={setConjuntDetails}
               conjuntTotals={conjuntTotals}
               setConjuntTotals={setConjuntTotals}
               details={details}
               setDetails={setDetails}
-            />
+            />}>
+          </Route>
 
-          }></Route>
+          <Route path='/invoice' element={<Invoice 
+          cambiazo={cambiazo}
+          printBudget={printBudget}
+          setPrintBudget={setPrintBudget}
+          conjuntTotals={conjuntTotals}
+          setConjuntTotals={setConjuntTotals}
+          details={details}
+          setDetails={setDetails}
+          />}>
+          </Route>
+
+          <Route path='/printinvoice' element={<PrintInvoice
+              cambiazo={cambiazo}
+              printBudget={printBudget}
+              setPrintBudget={setPrintBudget}
+              conjuntTotals={conjuntTotals}
+              setConjuntTotals={setConjuntTotals}
+              details={details}
+              setDetails={setDetails}
+            />}>
+          </Route>
 
 
         </Routes>

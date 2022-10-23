@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, details, setDetails, conjuntTotals, setConjuntTotals }) => {
+const PrintInvoice = ({ cambiazo, printBudget, setPrintBudget, details, setDetails, conjuntTotals, setConjuntTotals }) => {
 
 
 
@@ -29,11 +29,11 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, details, setDetail
         <div className='w-full border  text-xs sm:text-base md:text-lg'>
 
 <div className='flex justify-end items-center h-1 py-2 px-2'>
-      <p className='text-xs mx-2'><Link to='/budget' onClick={() => clearBudgetPrint()}>Volver</Link></p>
+      <p className='text-xs mx-2'><Link to='/invoice' onClick={() => clearBudgetPrint()}>Volver</Link></p>
         <p className='text-xs mx-2'><Link to='/printbudget'>Print</Link></p>
       </div>
 
-            <p className=' text-center text-2xl p-2'>Presupuesto</p>
+            <p className=' text-center text-2xl p-2'>Factura</p>
             <div className='flex justify-end px-4 mb-2 text-red-900'>
                 <p>{`Nº: ${generateIdPresupuesto()}`}</p>
             </div>
@@ -113,4 +113,4 @@ const PrintBudget = ({ cambiazo, printBudget, setPrintBudget, details, setDetail
     )
 }
 
-export default PrintBudget
+export default PrintInvoice

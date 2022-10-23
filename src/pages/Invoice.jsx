@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PrintBudget from './PrintBudget';
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 
-const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConjuntTotals, details, setDetails }) => {
+const Invoice = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConjuntTotals, details, setDetails }) => {
 
   let date = new Date();
   let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
@@ -139,10 +139,10 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
 
       <div className='flex justify-end items-center h-1 py-2 px-2'>
       <p className='text-xs mx-2'><Link to='/'>Volver</Link></p>
-        <p className='text-xs mx-2'><Link to='/printbudget'>Print</Link></p>
+        <p className='text-xs mx-2'><Link to='/printInvoice'>Print</Link></p>
       </div>
 
-      <p className='bg-blue-200 text-center text-2xl mb-2 p-2'>Presupuesto</p>
+      <p className='bg-blue-200 text-center text-2xl mb-2 p-2'>Factura</p>
 
       <div className='w-full h-auto flex'>
         <div className='w-1/2 border-gray-600 border-2 p-2 mx-2'>
@@ -159,7 +159,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
       </div>
 
       <div className='flex mt-2 border-2 border-gray-600 mx-2'>
-        <p className='w-1/2 p-2 mx-2'>{`Fecha del presupuesto: ${output}`}</p>
+        <p className='w-1/2 p-2 mx-2'>{`Fecha: ${output}`}</p>
         <p className='w-1/2 p-2 mx-2'>Validez: 10 días habiles</p>
       </div>
 
@@ -172,7 +172,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
         </div>
 
         <div className='w-full flex justify-between items-center py-1'>
-          <input type="text" id="description" className='mr-1 w-2/3 h-5' value={description} onChange={(e) => setDescripcion(e.target.value)} />
+          <input type="text" id="description" className='mr-1 w-2/3 h-5 uppercase' value={description} onChange={(e) => setDescripcion(e.target.value)} />
           <input type="number" id="cant" className='mx-1 w-1/6 h-5' value={cant} onChange={(e) => setCant(e.target.value)} />
           <input type="number" id="price" className='mx-1 w-1/6 h-5' value={price} onChange={(e) => setPrice(e.target.value)} />
           <button type='submit' className='bg-blue-400  rounded-full w-6 h-5 text-lg text-white flex items-center justify-center'>+</button>
@@ -228,6 +228,12 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
 
       </div>
 
+
+
+
+
+
+
     </div>
 
 
@@ -235,4 +241,4 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
   )
 }
 
-export default Budget
+export default Invoice

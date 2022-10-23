@@ -27,7 +27,7 @@ const Modal = ({ registerDel, setRegisterDel, wrap, setShowModal, showModal, isS
 
                         <div className='flex justify-end'>
                             <button className='m-3 underline' onClick={() => cambiar()} ><Link to='/budget'>Presupuesto</Link></button>
-                            <button className='m-3 underline'>Facturar</button>
+                            <button className='m-3 underline' onClick={() => cambiar()} ><Link to='/invoice'>Facturar</Link></button>
                             <button className='mx-6 text-4xl text-red-600' onClick={() => isShowModal(registerDel)}>x</button>
                         </div>
 
