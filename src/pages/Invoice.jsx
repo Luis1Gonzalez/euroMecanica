@@ -223,7 +223,7 @@ const Invoice = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setCon
 
         <div className='flex justify-end px-2'>
           <p className='mx-7'>Total Presupuesto</p>
-          <p>{`${total}`}</p>
+          <p>{`${total.toFixed(2)}`}</p>
         </div>
 
       </div>
