@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import PrintBudget from './PrintBudget';
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 
-const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConjuntTotals, details, setDetails }) => {
+const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntTotals, setConjuntTotals, details, setDetails }) => {
 
   let date = new Date();
   let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
   let count = 0
-  let countless=0
+  let countless = 0
   let sum = 0;
-  let rest =0;
+  let rest = 0;
   const ini = 0;
   let calcIva;
   let calcTotal;
@@ -70,7 +70,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
       setPrice('');
 
       setPrintBudget(objDetail)
-  
+
     }
   }
 
@@ -80,65 +80,52 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
 
     countless = d.cant * d.price
     setPineLess([...pineLess, countless])
-    
+
   }
 
+  useEffect(() => {
+    sum = pine.reduce((prev, curr) => prev + curr, ini);
+    rest = pineLess.reduce((prev, curr) => prev + curr, ini);
+    setSubTotal(sum - rest)
+  }, [details])
 
-
-  const changeButton = () => {
-
-    if (sCButton === 'green') {
-      setSTButton('Listo')
-      setSCButton('yellow')
-      setSDisabled(false)
-
+  useEffect(() => {
+    if (details.length <= 0) {
+      setIva(0)
     } else {
-      setSTButton('Sub-Total')
-      setSCButton('transparent')
-      setSDisabled(true)
-      setTDisabled(false)
-      setCButton('orange')
-      sum = pine.reduce((prev, curr) => prev + curr, ini);
-      rest = pineLess.reduce((prev, curr) => prev + curr, ini);
-      setSubTotal(sum-rest)
-  
-      calcIva = sum * 0.21;
-      setIva(calcIva)
+      setIva(subTotal * 0.21)
     }
-  }
+  }, [subTotal])
 
-  const fCalcTotal = () => {
-
-    calcTotal = (subTotal + iva - parseInt(discount));
-
-        
-    const objTotal = {
-      
-      subTotal,
-      iva,
-      total,
-      discount:parseInt(discount)
-    }
-
-    if (cButton === 'orange') {
-      setTButton('Listo')
-      setCButton('violet')
-
+  useEffect(() => {
+    if (details.length <= 0) {
+      setTotal(0)
     } else {
-      setTButton('Total')
-      setCButton('transparent')
-      setTDisabled(true)
+      setTotal(subTotal + iva - parseInt(discount))
     }
-    setTotal(calcTotal)
-    setConjuntTotals(objTotal)    
-  }
+
+  }, [subTotal])
+
+  useEffect(() => {
+    if (details.length <= 0) {
+      setTotal(0)
+    } else {
+      setTotal(subTotal + iva - parseInt(discount))
+    }
+  }, [discount])
+
+  console.log(pine)
+  console.log(details)
+  console.log(iva)
+  console.log(subTotal)
+  console.log(total)
 
 
   return (
     <div className='w-full border bg-red-200  text-xs sm:text-base md:text-lg'>
 
       <div className='flex justify-end items-center h-1 py-2 px-2'>
-      <p className='text-xs mx-2'><Link to='/'>Volver</Link></p>
+        <p className='text-xs mx-2'><Link to='/'>Volver</Link></p>
         <p className='text-xs mx-2'><Link to='/printbudget'>Print</Link></p>
       </div>
 
@@ -183,10 +170,6 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
           <input type="number" id="discount" className='mx-1 w-12 h-5' value={discount} onChange={(e) => setDiscount(e.target.value)} />
         </div>
 
-        <div className='flex justify-center'>
-          <button className='border w-1/2 m-3 p-1.5 rounded-lg  shadow-inner' style={{ backgroundColor: `${sCButton}` }} onClick={() =>changeButton()} disabled={sDisabled}>{stButton}</button>
-          <button className='border w-1/2 m-3 p-1.5 rounded-lg shadow-inner' style={{ backgroundColor: `${cButton}` }} onClick={() => fCalcTotal()} disabled={tDisabled}>{tButton}</button>
-        </div>
       </form>
 
       <div className=' border-2 border-gray-600 p-2 mx-2 mt-2 flex flex-col'>
@@ -236,3 +219,5 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget,  conjuntTotals, setConj
 }
 
 export default Budget
+
+
