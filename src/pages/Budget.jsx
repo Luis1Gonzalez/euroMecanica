@@ -29,16 +29,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntTotals, setConju
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0)
   const [discount, setDiscount] = useState(0);
-  const [stButton, setSTButton] = useState('Generar');
-  const [tButton, setTButton] = useState('Generar');
-  const [cButton, setCButton] = useState('transparent');
-  const [sCButton, setSCButton] = useState('green');
-  const [sDisabled, setSDisabled] = useState(false);
-  const [tDisabled, setTDisabled] = useState(true);
   const [pineLess, setPineLess] = useState([]);
-
-
-
 
   const generateId = () => {
     const dateNow = Date.now().toString(36).toUpperCase();
@@ -100,6 +91,7 @@ const Budget = ({ cambiazo, printBudget, setPrintBudget, conjuntTotals, setConju
   useEffect(() => {
     if (details.length <= 0) {
       setTotal(0)
+      setDiscount(0)
     } else {
       setTotal(subTotal + iva - parseInt(discount))
     }
